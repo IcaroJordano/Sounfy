@@ -22,9 +22,11 @@ interface Music {
 function App() {
   const [musicas, setMusicas] = useState<Music[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     let url = formData.get("url") as string;
@@ -34,7 +36,9 @@ function App() {
       return;
     }
 
-    url = url.replace('https://open.spotify.com/track/', '');
+    setIsLoading(true)
+
+    url = url.replace('https://open.spotify.com/track/', '').trim();
 
     const preToken = localStorage.getItem("token");
 
@@ -63,6 +67,8 @@ function App() {
 
         setMusicas((prev) => [...prev, ...novasMusicas]);
         // setMusicas(data);
+
+    setIsLoading(false)
       })
       .catch(async (error) => {
         console.log("erro na requisicao");
@@ -84,27 +90,26 @@ function App() {
   //   console.log(musicas);
   // }, [musicas]);
 
-  // useEffect(() => {
-  //   const fetchToken = async () => {
-  //     const novoToken = await gerarToken();
-  //     localStorage.setItem("token", JSON.stringify(novoToken));
-  //     console.log("tokenGerado");
-  //   };
+  useEffect(() => {
+    const fetchToken = async () => {
+      const novoToken = await gerarToken();
+      localStorage.setItem("token", JSON.stringify(novoToken));
+      console.log("tokenGerado");
+    };
 
-  //   fetchToken();
-  // }, []);
+    fetchToken();
+  }, []);
 
   return (
     <>
       <ModalConfirmation isOpen={isOpen} onClose={() => setIsOpen(false)} onConfirm={() => setIsOpen(false)} />  
       {isError && <AlertError isError={isError} setIsError={setIsError} mesage={"Link Invalido! Tente Novamente"} />}
-      <div className="lg:p-3 lg:pt-6 z-10  bg-neutral-800 ">
-        <div className="lg:rounded-lg flex flex-col justify-center text-neutral-400  bg-neutral-900  ">
-          <div className="text-center">
-            <h1 className="text-4xl pt-11 font-bold text-white">
-              <span className="text-green-500">Soundfy</span> Social
+        <div className=" flex  flex-col items-center  lg:flex-row  min-h-screen lg:justify-around justify-center text-neutral-400  bg-neutral-900  ">
+          <div className="text-center lg:mb-22 mb-8" >
+            <h1 className="text-3xl lg:pt-0 pt-11 font-bold text-white">
+              <span className="text-green-400">Soundfy</span> Social
             </h1>
-            <p className="my-4  px-6 lg:px-0 mx-auto">
+            <p className="my-4 lg:text-sm lg:mb-8 px-6 lg:px-0 mx-auto">
               Descubra e avalie recomendações de músicas de forma rápida e
               social
             </p>
@@ -112,10 +117,10 @@ function App() {
               onSubmit={(e) => {
                 handleSubmit(e);
               }}
-              className="flex  border w-11/12 lg:w-4/12 my-8 lg:my-0 mb-4 justify-between mx-auto p-1 rounded-xl  "
+              className="flex lg:mb-6 border-neutral-400/35 border w-11/12 lg:w-9/12 my-8 lg:my-0 mb-4 justify-between mx-auto p-1 rounded-xl  "
             >
               <input
-                className=" text-neutral-100 px-2 rounded-lg py-2 w-11/12 lg:px-2 text-sm border-none focus:outline-none "
+                className=" text-neutral-100 px-2 rounded-lg py-2  w-11/12 lg:px-2 text-sm border-none focus:outline-none "
                 id="url"
                 name="url"
                 placeholder="Cole o link da música do Spotify"
@@ -123,22 +128,26 @@ function App() {
               />
               <button
                 type="submit"
-                className="bg-green-500 text-neutral-100 rounded-lg py-1 px-3 text-sm"
+                className="bg-green-500 text-neutral-100 rounded-lg py-1 hover:bg-green-600 cursor-pointer  lg:text-xs px-3 text-sm"
               >
                 Explorar{" "}
               </button>
             </form>
-            <label className="text-xs my-4  pt-8" htmlFor="url">
+            <div className="lg:w-9/12 mx-auto">
+
+            <label className="text-xs lg:px-8   " htmlFor="url">
               Ex:  https://open.spotify.com/track/7dKz6xy1ZMywmrrP5HMw8u?si=_FhRDMk-Q_Wl1OnRJ4d75w
             </label>
+            </div>
           </div>
 
 
-          <div className=" border-y border-neutral-600 my-8 min-h-80">
+          <div  className="custom-scroll border-y lg:border lg:p-8 rounded-lg   border-neutral-600/25 lg:my-8 min-h-80 max-h-[583px] overflow-auto">
             {musicas.length == 0 && (
-              <div>
+              <div
+              >
                 <span className="flex rounded-full bg-green-500 mx-auto items-center text-neutral-100 py-1 px-3 w-14 h-14 text-sm justify-center my-8">
-                  <BiPlusCircle size={20} className="mx-auto " />
+                  <BiPlusCircle size={20} className={`${ isLoading && "animate-spin"} mx-auto `} />
 
                 </span>
                 <p className="text-white text-center text-xl font-semibold">Nenhuma musica para mostrar </p>
@@ -147,10 +156,15 @@ function App() {
             
             )}
 
+            {musicas.length !== 0 && (
+              <h2 className="text-white p-4 lg:p-0 lg:ps-4 text-2xl font-bold lg:mb-8">Playlist Recomendada </h2>
+            )}
+
+            <div className="custom-scroll max-h-96 overflow-auto">
             {musicas?.map((musica: Music, index: any) => (
             
             
-              <a key={index} href={musica.link} className="flex flex-col gap-y-12  ">
+              <a  key={index} href={musica.link} className="flex flex-col gap-y-12  ">
                 <div className="flex  justify-between px-4 my-3">
                   <img
                     className="w-12 h-12 rounded-sm "
@@ -170,9 +184,9 @@ function App() {
                 </div>
               </a>
             ))}
-          </div>
+            </div>
+          </div>  
         </div>
-      </div>
     </>
   );
 }
