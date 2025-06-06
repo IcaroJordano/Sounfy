@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import requisicao from "./requisicao";
+// import requisicao from "./requisicao";
 
 import gerarToken from "./gerarToken";
 
-import TimeLine from "./components/TimeLine.tsx";
+// import TimeLine from "./components/TimeLine.tsx";
 
 import recomendacao from "./recomendacao.ts";
 import AlertError from "./components/AlertError.tsx";
-import { BiPlus, BiPlusCircle } from "react-icons/bi";
+import { BiPlusCircle } from "react-icons/bi";
 import { TbSquareLetterEFilled } from "react-icons/tb";
 import ModalConfirmation from "./components/ModalConfirmation.tsx";
 
