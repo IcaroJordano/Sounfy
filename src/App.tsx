@@ -9,6 +9,7 @@ import recomendacao from "./recomendacao.ts";
 import AlertError from "./components/AlertError.tsx";
 import { BiPlus, BiPlusCircle } from "react-icons/bi";
 import { TbSquareLetterEFilled } from "react-icons/tb";
+import ModalConfirmation from "./components/ModalConfirmation.tsx";
 
 interface Music {
   id: string;
@@ -79,26 +80,26 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    console.log(musicas);
-  }, [musicas]);
+  // useEffect(() => {
+  //   console.log(musicas);
+  // }, [musicas]);
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      const novoToken = await gerarToken();
-      localStorage.setItem("token", JSON.stringify(novoToken));
-      console.log("tokenGerado");
-    };
+  // useEffect(() => {
+  //   const fetchToken = async () => {
+  //     const novoToken = await gerarToken();
+  //     localStorage.setItem("token", JSON.stringify(novoToken));
+  //     console.log("tokenGerado");
+  //   };
 
-    fetchToken();
-  }, []);
+  //   fetchToken();
+  // }, []);
 
   return (
     <>
+      <ModalConfirmation isOpen={isOpen} onClose={() => setIsOpen(false)} onConfirm={() => setIsOpen(false)} />  
       {isError && <AlertError isError={isError} setIsError={setIsError} mesage={"Link Invalido! Tente Novamente"} />}
-      {isOpen && <TimeLine itens={musicas} />}
       <div className="lg:p-3 lg:pt-6 z-10  bg-neutral-800 ">
-        <div className="lg:rounded-lg flex flex-col justify-center text-neutral-400  bg-neutral-900 min-h-screen ">
+        <div className="lg:rounded-lg flex flex-col justify-center text-neutral-400  bg-neutral-900  ">
           <div className="text-center">
             <h1 className="text-4xl pt-11 font-bold text-white">
               <span className="text-green-500">Soundfy</span> Social
@@ -117,7 +118,7 @@ function App() {
                 className=" text-neutral-100 px-2 rounded-lg py-2 w-11/12 lg:px-2 text-sm border-none focus:outline-none "
                 id="url"
                 name="url"
-                placeholder="Cole o link da playlist do Spotify"
+                placeholder="Cole o link da música do Spotify"
                 type="text"
               />
               <button
@@ -132,17 +133,6 @@ function App() {
             </label>
           </div>
 
-          {/* <button onClick={() => setIsOpen(!isOpen)} className="bg-green-500 text-neutral-100 rounded-lg py-1 px-3 text-sm my-4 mx-auto" >Click</button> */}
-          {/* <button
-            onClick={() => {
-              const preToken = localStorage.getItem("token");
-              const token = JSON.parse(preToken!);
-              recomendacao('aa',token)
-            }}
-            className="bg-green-500 text-neutral-100 rounded-lg py-1 px-3 text-sm my-4 mx-auto"
-          >
-            Recomendar
-          </button> */}
 
           <div className=" border-y border-neutral-600 my-8 min-h-80">
             {musicas.length == 0 && (
@@ -152,23 +142,13 @@ function App() {
 
                 </span>
                 <p className="text-white text-center text-xl font-semibold">Nenhuma musica para mostrar </p>
-                <p className="text-neutral-400 text-center text-sm my-4">Cole o link da playlist do Spotify acima para comecar a explorar</p>
+                <p className="text-neutral-400 text-center text-sm my-4">Cole o link da músicas do Spotify acima para comecar a explorar</p>
               </div>
             
             )}
 
             {musicas?.map((musica: Music, index: any) => (
-            //   <iframe
-            //   src={`https://open.spotify.com/embed/track/${musica.id}`}
-            //   width="300"
-            //   height="80"
-            //   frameBorder="0"
-            //   allowTransparency={true}
-            //   allow="encrypted-media"
-            //   style={{
-            //     backgroundColor: 'transparent'
-            //   }}
-            // ></iframe>
+            
             
               <a key={index} href={musica.link} className="flex flex-col gap-y-12  ">
                 <div className="flex  justify-between px-4 my-3">
@@ -198,3 +178,28 @@ function App() {
 }
 
 export default App;
+
+{/* <button onClick={() => setIsOpen(!isOpen)} className="bg-green-500 text-neutral-100 rounded-lg py-1 px-3 text-sm my-4 mx-auto" >Click</button> */}
+{/* <button
+  onClick={() => {
+    const preToken = localStorage.getItem("token");
+    const token = JSON.parse(preToken!);
+    recomendacao('aa',token)
+  }}
+  className="bg-green-500 text-neutral-100 rounded-lg py-1 px-3 text-sm my-4 mx-auto"
+>
+  Recomendar
+</button> */}
+//   <iframe
+            //   src={`https://open.spotify.com/embed/track/${musica.id}`}
+            //   width="300"
+            //   height="80"
+            //   frameBorder="0"
+            //   allowTransparency={true}
+            //   allow="encrypted-media"
+            //   style={{
+            //     backgroundColor: 'transparent'
+            //   }}
+            // ></iframe>
+
+      {/* {isOpen && <TimeLine itens={musicas} />} */}
