@@ -1,54 +1,88 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img width='351px' src="./public/logo.png" alt="Project Name">
+</p>
 
-Currently, two official plugins are available:
+# Soundfy | Descubra e avalie músicas de forma divertida e social
+<p align="center">
+     <a target='_blanc' href="https://icarojordano.github.io/soundfy/">📱 Visite o Projeto</a>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📝 Descrição do Projeto
+Soundfy é uma plataforma de recomendação musical simplificada, desenvolvida para contornar as limitações do endpoint público de recomendações do Spotify, sem exigir autenticação OAuth. O projeto utiliza a API pública do Spotify e um algoritmo próprio de recomendação para oferecer sugestões musicais de forma rápida e acessível.
 
-## Expanding the ESLint configuration
+Com o Soundfy, o usuário pode:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- *Inserir um link de compartilhamento de qualquer música do Spotify
+- *Receber uma lista personalizada de faixas relacionadas
+- *Visualizar informações como capa, artista e nome da música
+- *Acessar as faixas sugeridas diretamente pelo Spotify
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+O foco principal está em simplificar o acesso às recomendações musicais, sem necessidade de login, token de usuário ou configurações avançadas — ideal para entusiastas de música, criadores de conteúdo e curiosos musicais.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Esta é uma versão MVP (Produto Mínimo Viável), funcional nos principais fluxos e pronta para testes de usabilidade e expansão futura.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Perfeito como base para sistemas de curadoria musical, playlists inteligentes ou explorações com APIs públicas em projetos frontend.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
+## 💻 Tech Stack
+
+<!--- # "Verify icons availability here https://github.com/tandpfun/skill-icons" -->
+
+[![My Skills](https://skillicons.dev/icons?i=ts,ai,git,github,vite,react,tailwind,spotify)](https://skillicons.dev)
+<img src="https://developer-assets.spotifycdn.com/images/favicon.ico" width="50px;" alt="Api Spotify Web for Developers"/><br>
+
+<h2 id="layout">🎨 Layout</h2>
+
+<p align="center" >
+    <img src="./public/home.jpg" alt="Home Page" width="400px">
+    <img src="./public/soundfy-validacao.jpg" alt="Validacao do Campo" width="400px">
+    <img src="./public/playlist.png" alt="Validacao do Campo" width="400px">
+    
+</p>
+<p align="center" >
+    <img src="./public/home-mobile.jpg" alt="Home Page" width="200px">
+    <img src="./public/validacao-mobile.jpg" alt="Validacao do Campo" width="200px">
+    <img src="./public/playlist-mobile.jpg" alt="Validacao do Campo" width="200px">
+    
+</p>
+
+## 🧩 Features
+ - [X] Inserção de link de música via compartilhamento do Spotify
+ - [X] Extração automática dos dados da faixa (nome, artista, imagem)
+ - [X] Algoritmo próprio de recomendação com base na música inserida
+ - [X] Sugestões de faixas semelhantes sem necessidade de login OAuth
+ - [X] Cards interativos com título, artista e capa da música recomendada
+ - [X] Botões com link direto para ouvir a música no Spotify
+ - [X] Design limpo, moderno e responsivo (mobile-first)
+ - [X] Projeto leve e funcional, ideal para estudos com APIs públicas
+ - [X] Feedback visual para links inválidos ou falhas de resposta
+ - [X] Experiência fluida sem necessidade de recarregar a página
+
+
+
+<h2 id="colab">🤝 Collaborators</h2>
+
+Agradecimento especial a todas as pessoas que contribuíram para este projeto.
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/icaro-jordano/" target="_blanc">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFIlicJJJN2uw/profile-displayphoto-shrink_100_100/B4DZY_JWZ0G8AY-/0/1744816138605?e=1754524800&v=beta&t=nBiS-WN5oxWWnZsbaxubW88NxWNfwwGTmf5EtoQIuhY" width="100px;" alt="Icaro Jordano | Desenvolvedor e Tech Manager"/><br>
+        <sub>
+          <b>Icaro Jordano | Desenvolvedor 
+            e Tech Manager</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+    <a href="https://www.linkedin.com/in/icaro-jordano/" target="_blanc">
+        <img src="https://developer-assets.spotifycdn.com/images/favicon.ico" width="100px;" alt="Api Spotify Web for Developers"/><br>
+        <sub>
+          <b>Api Spotify Web for Developers</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
